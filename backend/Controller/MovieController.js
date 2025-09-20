@@ -1,0 +1,55 @@
+const { TMDB_ENDPOINT, getMediaList } = require("../Services/tmdb");
+
+
+async function getActionMovies(req,res) {
+    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+
+    res.status(200).json({
+        message:"Action Movies",
+        status:"success",
+        media:response
+    })
+}
+
+async function getComedyMovies(req,res) {
+    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+
+    res.status(200).json({
+        message:"Comedy Movies",
+        status:"success",
+        media:response
+    })
+}
+
+async function getHorrorMovies(req,res) {
+    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+
+    res.status(200).json({
+        message:"Horror Movies",
+        status:"success",
+        media:response
+    })
+}
+
+async function getRomanceMovies(req,res) {
+    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+
+    res.status(200).json({
+        message:"Romance Movies",
+        status:"success",
+        media:response
+    })
+}
+
+async function getAnimeMovies(req,res) {
+    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+
+    res.status(200).json({
+        message:"Anime Movies",
+        status:"success",
+        media:response
+    })
+}
+
+
+module.exports={getActionMovies, getAnimeMovies, getComedyMovies, getHorrorMovies, getRomanceMovies}
