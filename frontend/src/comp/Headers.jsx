@@ -17,20 +17,20 @@ function Headers() {
     const path = usePathname();
     const activeTabKey = path.split("/")[1];
   return (
-    <header className='w-[100vw] py-4 fixed top-0 z-50 border-b-2 border-b-grey bg-[#080e10] '>
+    <header className='w-[100vw] py-4 fixed top-0 z-50 border-b-2 border-b-[#353535] bg-[#080e10] '>
         <div className='mx-auto px-4 flex items-center text-nowrap'>
-            <div className='flex items-center '>
+            <div className='flex items-center'>
                 <Link href="/">
                     <Image src="/logo.svg" width={400} height={136} className='' alt='Image'/>
                 </Link>
                 <Link href="/subscription" className='border text-[#c1a362] font-medium border-[#c1a362] px-6 py-1 flex items-center justify-center gap-2 rounded-[23px] ml-4 mr-4 '>
-                    <Image src="/crown.svg"  width={15} height={15} alt='image'/>
-                    <span className='text-[17px]'>Go Premium</span>
+                    <Image src="/crown.svg"  width={16} height={16} alt='image'/>
+                    <span className='text-[16px]'>Go Premium</span>
                 </Link>
             </div>
             <nav className="flex gap-4">
                 {navLinks.map(item=>(
-                    <Link href={item.href} key={item.key} className={`px-1 py-2 text-[17px] font-medium text-[#b6b8b8] hover:text-white gap ${activeTabKey === item.key
+                    <Link href={item.href} key={item.key} className={`px-1 py-2 text-[16px] font-medium text-[#b6b8b8] hover:text-white gap ${activeTabKey === item.key
                 ? "border-b-2 border-pink-500 text-white"
                 : ""
                 }`} >
