@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react'
 import Skeleton from '../../../atom/Skeleton'
-import { media } from '@/lib/endpoint'
+import { getUrlDetails, media } from '@/lib/endpoint'
 import Image from 'next/image';
+import Link from 'next/link';
 
 function CategorySection({title,id,fetcher}) {
   return (
@@ -25,7 +26,9 @@ async function CategorySectionData({fetcher}) {
   return (
     <div className='flex gap-4 w-full overflow-scroll scrollbar-hide'>
             {data.map((vid)=>(
-                <Image key={vid.id} alt='image'  height={300} width={200}className='min-w-[200px] h-[300px] rounded-lg object-cover cursor-pointer' src={media(vid.poster_path)} quality={30}/>
+                <Link href={getUrlDetails(vid.id,vid.media_type)} key={vid.id}>
+                  <Image alt='image'  height={300} width={200}className='min-w-[200px] h-[300px] rounded-lg object-cover cursor-pointer' src={media(vid.poster_path)} quality={30}/>
+                </Link>
             ))}        
     </div>
   )

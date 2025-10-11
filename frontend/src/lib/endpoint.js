@@ -58,3 +58,8 @@ export const api = axios.create({
     // credentials
     withCredentials: true,
 });
+
+
+export const getUrlDetails=(vid,mediaType)=>{
+    return mediaType==="tv" ? "tv/watch?id="+vid : "movies/watch?id="+vid 
+}

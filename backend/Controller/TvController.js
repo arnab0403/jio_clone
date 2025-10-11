@@ -117,4 +117,28 @@ async function getMysteryTvShows(req,res){
     }
 }
 
-module.exports={getActionTvShows, getComedyTvShows,getCrimeTvShows,getDramaTvShows,getMysteryTvShows};
+
+async function getTvShowsDetails(req,res){
+    try {
+        const {id}=req.query;
+        console.log("debug");
+        const response = await getMediaList.get(TMDB_ENDPOINT.fetchTvShowVideos(id));
+        console.log(response)
+        
+        response.results.forEach(item => {
+            item.media_type = "tv";
+        });
+
+        res.status(200).json({
+            message:"Mystrey Tv Shows",
+            media:response,
+            status:"failed"
+        })
+    } catch (error) {
+        res.status(400).status({
+            message:"Internal Server Error",
+            status:"failed"
+        })
+    }
+} 
+module.exports={getActionTvShows, getComedyTvShows,getCrimeTvShows,getDramaTvShows,getMysteryTvShows, getTvShowsDetails};
