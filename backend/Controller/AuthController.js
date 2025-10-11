@@ -32,6 +32,15 @@ const signUp = async (req, res) =>{
             );
         }
 
+        const email = user.email;
+        const isExist=await UserModel.findOne({email});
+
+        if(isExist){
+            return res.status(400).json({
+                message:"User already exist",
+                status:"failed"
+            })
+        }
         // password hashing
         const password=user.password;
         const hashedPassword = await hashPassword(password);
@@ -207,12 +216,16 @@ async function protectedRouteMiddleware (req,res,next){
 
         if (req.cookies && req.cookies?.jwt) {
             const jwtToken = req.cookies.jwt;
-            const jwt = await jwtVerify(jwtToken,process.env.secrect_key);
+            const jwt = await jwtVerify(jwtToken,process.env.SECRECT_KEY);
             const id = jwt.id;
-            res.userId = id;
+            req.userId = id;
             next();
         }else{
-            console.log("no cookies are here");
+            console.log("No Cookies here")
+            return res.status(400).json({
+            message:"No Cookies Found",
+            status:"failed"
+            });
         }
     } catch (error) {
         console.log(error);

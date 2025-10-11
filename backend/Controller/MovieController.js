@@ -2,7 +2,7 @@ const { TMDB_ENDPOINT, getMediaList } = require("../Services/tmdb");
 
 
 async function getActionMovies(req,res) {
-    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+    const response = await getMediaList.get(TMDB_ENDPOINT.fetchActionMovies);
 
     res.status(200).json({
         message:"Action Movies",
@@ -12,7 +12,7 @@ async function getActionMovies(req,res) {
 }
 
 async function getComedyMovies(req,res) {
-    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+    const response = await getMediaList.get(TMDB_ENDPOINT.fetchComedyMovies);
 
     res.status(200).json({
         message:"Comedy Movies",
@@ -22,7 +22,7 @@ async function getComedyMovies(req,res) {
 }
 
 async function getHorrorMovies(req,res) {
-    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+    const response = await getMediaList.get(TMDB_ENDPOINT.fetchHorrorMovies);
 
     res.status(200).json({
         message:"Horror Movies",
@@ -32,7 +32,7 @@ async function getHorrorMovies(req,res) {
 }
 
 async function getRomanceMovies(req,res) {
-    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+    const response = await getMediaList.get(TMDB_ENDPOINT.fetchRomanceMovies);
 
     res.status(200).json({
         message:"Romance Movies",
@@ -42,7 +42,7 @@ async function getRomanceMovies(req,res) {
 }
 
 async function getAnimeMovies(req,res) {
-    const response = await getMediaList(TMDB_ENDPOINT.fetchActionMovies);
+    const response = await getMediaList.get(TMDB_ENDPOINT.fetchAnimeMovies);
 
     res.status(200).json({
         message:"Anime Movies",

@@ -4,7 +4,7 @@ const { getMediaList, TMDB_ENDPOINT } = require("../Services/tmdb");
 
 async function getUser(req,res) {
     try {
-        const userId = req.body.userId;
+        const userId = req.userId;
 
         const {name,email,wishList,isPremium} = await UserModel.findById(userId);
 
@@ -19,6 +19,7 @@ async function getUser(req,res) {
         });
 
     } catch (error) {
+        console.log(error)
         res.status(400).json({
             message:"Internal Server Error",
             status:"failed"

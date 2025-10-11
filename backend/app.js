@@ -7,6 +7,7 @@ const cors = require("cors");
 const discoverRouter = require("./Routes/DiscoverRoute");
 const userRouter = require("./Routes/UserRoute");
 const tvRouter = require("./Routes/TvRouter");
+const cookieParser = require('cookie-parser');
 
 const app = express();
 dotenv.config();
@@ -20,18 +21,19 @@ mongoose.connect(dbLink)
 });
 
 app.use(cors({
-  origin: "http://localhost:5173", // frontend URL
+  origin: "http://localhost:3000", // frontend URL
   credentials: true                // 👈 allow cookies
 }));
 
-
+app.use(cookieParser());
+app.use(express.json());
 
 // routes
 app.use("/api/auth/",authRouter);
 app.use("/api/user/",userRouter);
 app.use("/api/discover/",discoverRouter);
 app.use("/api/tv/",tvRouter);
-app.use("/api/movie/",movieRouter);
+app.use("/api/movies/",movieRouter);
 
 
 app.listen(SERVER_PORT,function(){

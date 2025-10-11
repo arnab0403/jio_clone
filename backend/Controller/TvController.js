@@ -2,8 +2,7 @@ const { getMediaList, TMDB_ENDPOINT } = require("../Services/tmdb")
 
 async function getActionTvShows(req,res){
     try {
-        console.log("debug");
-        const response = await getMediaList(TMDB_ENDPOINT.fetchActionTvShows);
+        const response = await getMediaList.get(TMDB_ENDPOINT.fetchActionTvShows);
         console.log(response)
         
         response.results.forEach(item => {
@@ -16,7 +15,8 @@ async function getActionTvShows(req,res){
             status:"failed"
         })
     } catch (error) {
-        res.status(400).status({
+        console.log(error)
+        res.status(400).json({
             message:"Internal Server Error",
             status:"failed"
         })
@@ -27,7 +27,7 @@ async function getActionTvShows(req,res){
 async function getComedyTvShows(req,res){
     try {
         console.log("debug");
-        const response = await getMediaList(TMDB_ENDPOINT.fetchComedyTvShows);
+        const response = await getMediaList.get(TMDB_ENDPOINT.fetchComedyTvShows);
         console.log(response)
         
         response.results.forEach(item => {
@@ -50,7 +50,7 @@ async function getComedyTvShows(req,res){
 async function getCrimeTvShows(req,res){
     try {
         console.log("debug");
-        const response = await getMediaList(TMDB_ENDPOINT.fetchCrimeTvShows);
+        const response = await getMediaList.get(TMDB_ENDPOINT.fetchCrimeTvShows);
         console.log(response)
         
         response.results.forEach(item => {
@@ -74,7 +74,7 @@ async function getCrimeTvShows(req,res){
 async function getDramaTvShows(req,res){
     try {
         console.log("debug");
-        const response = await getMediaList(TMDB_ENDPOINT.fetchDramaTvShows);
+        const response = await getMediaList.get(TMDB_ENDPOINT.fetchDramaTvShows);
         console.log(response)
         
         response.results.forEach(item => {
@@ -97,7 +97,7 @@ async function getDramaTvShows(req,res){
 async function getMysteryTvShows(req,res){
     try {
         console.log("debug");
-        const response = await getMediaList(TMDB_ENDPOINT.fetchMysteryTvShows);
+        const response = await getMediaList.get(TMDB_ENDPOINT.fetchMysteryTvShows);
         console.log(response)
         
         response.results.forEach(item => {

@@ -1,14 +1,36 @@
-const dotenv=require("dotenv");
+// Simple in-memory cache
+const cache = {};
+const cacheTimers = {};
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const setCache = (key, data) => {
+    cache[key] = data;
 
-dotenv.config();
-const imageBASEURL = "https://image.tmdb.org/t/p/original/";
-const tmdbBASEURL = "https://api.themoviedb.org/3";
+    // Clear existing timer if any
+    if (cacheTimers[key]) {
+        clearTimeout(cacheTimers[key]);
+    }
 
-const headers= {
+    // Set expiration timer
+    cacheTimers[key] = setTimeout(() => {
+        delete cache[key];
+        delete cacheTimers[key];
+    }, CACHE_DURATION);
+};
+
+const getCache = (key) => {
+    return cache[key];
+};
+
+// Helper functions
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+const headers = {
     accept: 'application/json',
-    Authorization: `Bearer ${process.env.TMDB_API_KEY}`
-}
-
+    // api key
+    Authorization: `Bearer ${process.env.TMDB_KEY} `
+};
+const imageBASEURL = "https://image.tmdb.org/t/p/original/";
+const tmdbBASEURL = "https://api.themoviedb.org/3/";
 // ahmarae backend yah data leke aayega 
 const TMDB_ENDPOINT = {
     //discover
@@ -38,38 +60,7 @@ const TMDB_ENDPOINT = {
 };
 
 
-
-
-// Simple in-memory cache
-const cache = {};
-const cacheTimers = {};
-const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-const setCache = (key, data) => {
-    cache[key] = data;
-
-    // Clear existing timer if any
-    if (cacheTimers[key]) {
-        clearTimeout(cacheTimers[key]);
-    }
-
-    // Set expiration timer
-    cacheTimers[key] = setTimeout(() => {
-        delete cache[key];
-        delete cacheTimers[key];
-    }, CACHE_DURATION);
-};
-
-const getCache = (key) => {
-    return cache[key];
-};
-
-// Helper functions
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-
-
-
-const getMediaList = {
+const tmdbApi = {
     get: async (endpoint) => {
         const cacheKey = `tmdb_${endpoint}`;
 
@@ -79,12 +70,12 @@ const getMediaList = {
             console.log(`Cache hit for: ${endpoint}`);
             return cachedData;
         }
-        
+
         console.log(`Cache miss for: ${endpoint}`);
-        
+
         const url = tmdbBASEURL + endpoint;
         let lastError;
-        
+
         // Retry mechanism - 3 attempts
         for (let attempt = 1; attempt <= 3; attempt++) {
             try {
@@ -99,13 +90,13 @@ const getMediaList = {
                 // Cache the successful response
                 setCache(cacheKey, data);
                 console.log(`Data cached for: ${endpoint}`);
-                
+
                 return data;
-                
+
             } catch (error) {
                 lastError = error;
                 console.log(`Attempt ${attempt} failed:`, error.message);
-                
+
                 // Don't wait after the last attempt
                 if (attempt < 3) {
                     // Wait before retry: 100ms, then 200ms
@@ -120,8 +111,9 @@ const getMediaList = {
         console.error(`All 3 attempts failed for ${endpoint}`);
         throw lastError;
     }
+    }
+
+
+module.exports = {
+    tmdbApi, TMDB_ENDPOINT,
 }
-
-
-
-module.exports={TMDB_ENDPOINT, getMediaList};

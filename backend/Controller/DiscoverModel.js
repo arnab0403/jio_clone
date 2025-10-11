@@ -4,7 +4,7 @@ const { TMDB_ENDPOINT, getMediaList } = require("../Services/tmdb");
 
 async function getNowPlaying (req,res){
     try {
-        const response =await getMediaList(TMDB_ENDPOINT.fetchNowPlaying);
+        const response =await getMediaList.get(TMDB_ENDPOINT.fetchNowPlaying);
         res.status(200).json({
             message:"Now Playing Movies",
             status:"success",
@@ -20,7 +20,7 @@ async function getNowPlaying (req,res){
 
 async function getTrending (req,res){
     try {
-        const response =await getMediaList(TMDB_ENDPOINT.fetchTrending);
+        const response =await getMediaList.get(TMDB_ENDPOINT.fetchTrending);
         res.status(200).json({
             message:"Tranding Movies",
             status:"success",
@@ -37,7 +37,7 @@ async function getTrending (req,res){
 
 async function getPopular (req,res){
     try {
-        const response =await getMediaList(TMDB_ENDPOINT.fetchPopular);
+        const response =await getMediaList.get(TMDB_ENDPOINT.fetchPopular);
         res.status(200).json({
             message:"Popular Movies",
             status:"success",
@@ -54,7 +54,7 @@ async function getPopular (req,res){
 
 async function getUpcoming (req,res){
     try {
-        const response =await getMediaList(TMDB_ENDPOINT.fetchUpcoming);
+        const response =await getMediaList.get(TMDB_ENDPOINT.fetchUpcoming);
         res.status(200).json({
             message:"Popular Movies",
             status:"success",
@@ -71,7 +71,7 @@ async function getUpcoming (req,res){
 
 async function getToprated (req,res){
     try {
-        const response =await getMediaList(TMDB_ENDPOINT.fetchTopRated);
+        const response =await getMediaList.get(TMDB_ENDPOINT.fetchTopRated);
         res.status(200).json({
             message:"Popular Movies",
             status:"success",

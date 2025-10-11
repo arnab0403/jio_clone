@@ -21,10 +21,6 @@ const user ={
         type: String,
         required: true 
     },
-    phone: { 
-        type: String,
-        required:true 
-    },
     imageUrl:{
         type:String
     },

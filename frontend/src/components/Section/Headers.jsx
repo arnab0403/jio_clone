@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
+import ProfileSheet from './ProfileSheet';
 
 export const navLinks = [
 { name: "Home", key: "", href: "/" },
@@ -39,8 +40,8 @@ function Headers() {
                 ))}
             </nav>
             
-            <div className="flex items-center justify-end  w-full">
-                <div className="rounded-3xl border lg:flex justify-center items-center px-4 gap-2 hidden">
+            <div className="flex items-center justify-end  w-full pr-4">
+                <div className="rounded-3xl border border-[#383838] lg:flex justify-center items-center px-4 gap-2 hidden">
                     <Image src="/search.svg" alt="search icon" height={20} width={20} />
                     <input
                     type="text"
@@ -48,6 +49,7 @@ function Headers() {
                     className=" py-2 bg-transparent  text-white font-medium focus:outline-none text-sm max-w-[150px]"
                     />
                 </div>
+                <ProfileSheet/>
             </div>
 
         </div>
