@@ -8,8 +8,8 @@ import { LoaderCircle } from 'lucide-react'
 function InitialLoad({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
 
+  console.log("Intial Load Render");
   const fetchUserDetails = async () => {
     try {
       const response = await api.get(ENDPOINT.user);

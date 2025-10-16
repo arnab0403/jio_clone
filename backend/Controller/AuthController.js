@@ -179,19 +179,26 @@ const forgotPassword = async (req, res) => {
 // rest password
 const resetPassword = async (req,res)=>{
     try {
+        console.log(req.body);
         const {email,otp,password}=req.body;
         const userRes = await UserModel.findOne({email});
+        if(!userRes){
+            return res.status(404).json({
+                message:"Email ID not found",
+                status:"failed"
+            });
+        }
         const userOtp = userRes.otp;
 
         if (userOtp!==otp) {
             return res.status(404).json({
-                message:"wrong otp",
+                message:"Wrong otp",
                 status:"failed"
             });
         }
 
         const hashedPassword = await hashPassword(password);
-        userRes.password=hashPassword;
+        userRes.password=hashedPassword;
         userRes.otp=undefined;
 
         userRes.save();

@@ -6,7 +6,7 @@ authRouter
     .post("/signup",signUp)
     .post("/login",login)
     .post("/logout",logout)
+    .post("/forgetPassword",forgotPassword)
     .post("/resetPassword",resetPassword)
-    .post("/forgotPassword",forgotPassword)
     
 module.exports=authRouter;

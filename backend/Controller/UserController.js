@@ -29,7 +29,7 @@ async function getUser(req,res) {
 
 async function addToWishList(req,res){
     try {
-        const userId=req.body.userId;
+        const userId=req.userId;
         const {id,media_type}=req.body;
 
         const user = await UserModel.findById(userId);
@@ -40,28 +40,40 @@ async function addToWishList(req,res){
                 status:"failed"
             })
         }
-        let postItem;
-        if (media_type == "tv" ){
-            postItem = (await getMediaList( TMDB_ENDPOINT.fetchTvShowDetails(id))).data;   
-        }else{
-            postItem = (await getMediaList(TMDB_ENDPOINT.fetchMovieDetails(id))).data;
+
+        if(user.wishList.find(item => item.id===id)){
+            return res.status(400).json({
+                status:"failed",
+                message:"Item already exist"
+            })
         }
 
+        let postItem;
+
+        if (media_type === "tv" ){
+            postItem = (await getMediaList.get(TMDB_ENDPOINT.fetchTvShowDetails(id)));   
+        }else{
+            postItem = (await getMediaList.get(TMDB_ENDPOINT.fetchMovieDetails(id)));
+        }
+
+        console.log(postItem);
         const wishListItem = {
             poster_path:postItem.poster_path,
-            name:postItem.title,
+            name:postItem.name || postItem.title,
             id:postItem.id,
             media_type:media_type
         }
 
-        user.wishList.push(wishListItem);
-        user.save();
+        await user.wishList.push(wishListItem);
+        await user.save();
         
 
         res.status(200).json({
-            status:"success"
+            status:"success",
+            message:"Item added to wishlist"
         })
     } catch (error) {
+        console.log(error);
         res.status(400).json({
             message:"Internal Server Error",
             status:"failed"
@@ -76,9 +88,10 @@ async function getUserWishList(req,res) {
         const {wishList}=await UserModel.findById(userId);
         
         if (wishList.length === 0) {
-            return res.status(404).json({
+            return res.status(200).json({
                 message:"No wishlist found",
-                status:"failed"
+                status:"success",
+                wishList:[]
             })
         }
 

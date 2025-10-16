@@ -4,6 +4,7 @@ export const ENDPOINT = {
     // auth
     login: "/auth/login",
     signup: "/auth/signup",
+
     // logout , user pending
     user: "/user",
     logout: "/auth/logout",
@@ -15,6 +16,7 @@ export const ENDPOINT = {
     discoverTrending: "/discover/trending",
     discoverTopRated: "/discover/top-rated",
     discoverUpcoming: "/discover/upcoming",
+    
     // movies
     fetchActionMovies: `/movies/action`,
     fetchComedyMovies: `/movies/comedy`,

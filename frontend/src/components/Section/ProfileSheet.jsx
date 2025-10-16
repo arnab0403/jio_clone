@@ -76,7 +76,7 @@ function ProfileSheet() {
             />)}
             
             <p className="text-xl font-bold capitalize">
-               {user.user?.name || 'Guest'}
+               {user.user?.name.split(" ")[0] || 'Guest'}
             </p>
             {user.isLoggedIn ? (<Button
                 href={"/login"}
