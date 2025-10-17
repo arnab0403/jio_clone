@@ -3,8 +3,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
-import React from 'react'
+import React, { use } from 'react'
 import ProfileSheet from './ProfileSheet';
+import { useSelector } from 'react-redux';
 
 export const navLinks = [
 { name: "Home", key: "", href: "/" },
@@ -17,6 +18,9 @@ export const navLinks = [
 function Headers() {
     const path = usePathname();
     const activeTabKey = path.split("/")[1];
+
+    const user = useSelector(state => state.user);
+    console.log(user)
   return (
     <header className='w-[100vw] py-4 fixed top-0 z-50 border-b-2 border-b-[#353535] bg-[#080e10] '>
         <div className='mx-auto px-4 flex items-center text-nowrap'>
@@ -24,10 +28,18 @@ function Headers() {
                 <Link href="/">
                     <Image src="/logo.svg" width={400} height={136} className='' alt='Image'/>
                 </Link>
+                {
+                user.user?.isPremium ? 
+                <div className='border text-[#c1a362] font-medium border-[#c1a362] px-6 py-1 flex items-center justify-center gap-2 rounded-[23px] ml-4 mr-4 '>
+                    <Image src="/crown.svg"  width={16} height={16} alt='image'/>
+                    <span className='text-[16px]'>Premium</span> 
+                </div>
+                :
                 <Link href="/subscription" className='border text-[#c1a362] font-medium border-[#c1a362] px-6 py-1 flex items-center justify-center gap-2 rounded-[23px] ml-4 mr-4 '>
                     <Image src="/crown.svg"  width={16} height={16} alt='image'/>
-                    <span className='text-[16px]'>Go Premium</span>
+                    <span className='text-[16px]'>Go Premium</span> 
                 </Link>
+                }
             </div>
             <nav className="flex gap-4">
                 {navLinks.map(item=>(

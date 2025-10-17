@@ -15,11 +15,14 @@ export const userSlice = createSlice({
     userLoggedOutDetails: (state) => {
       state.isLoggedIn=false,
       state.user=null
+    },
+    updateUserPremiumDetails:(state,action)=>{
+      state.user.isPremium=action.payload;
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { userLoggedInDetails, userLoggedOutDetails } = userSlice.actions
+export const { userLoggedInDetails, userLoggedOutDetails,updateUserPremiumDetails } = userSlice.actions
 
 export default userSlice.reducer;

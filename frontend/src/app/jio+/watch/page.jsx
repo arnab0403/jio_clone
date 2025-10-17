@@ -19,7 +19,7 @@ function page ({ searchParams }) {
 
   return (
     <div className='h-[90vh] w-full mt-[80px]'>
-        {!user?.user?.isPremium ? 
+        {user?.user?.isPremium ? 
         <>
           <div className='h-[85%]'>
                <video controls height={500} className='h-full w-full' autoPlay >
