@@ -84,7 +84,7 @@ function Login() {
                 </Button>
             <div className='w-full flex flex-row justify-between text-sm pt-6'>
                 <div>
-                    <Link href="/resetpassword">
+                    <Link href="forgetpassword">
                         Forget Password?
                     </Link>
                 </div>

@@ -46,9 +46,9 @@ export const ENDPOINT = {
     updatePremium: "/payment/update-premium-access",
 
     // streaming urls
-    fetchAllStreamingVideos: `/video`,
-    fetchStreamingVideo: (id) => `/video?id=${id}`,
-    fetchVideoThumbnail: (id) => `/video/thumbnail?videoId=${id}`,
+    fetchAllStreamingVideos: `/premium/video`,
+    fetchStreamingVideo: (name) => `/premium/video/steam?name=${name}`,
+    fetchVideoThumbnail: (name) => `/premium/video/thumbnail?name=${name}`,
 }
 
 export const media = (path) => `https://image.tmdb.org/t/p/original` + path;
@@ -65,3 +65,7 @@ export const api = axios.create({
 export const getUrlDetails=(vid,mediaType)=>{
     return mediaType==="tv" ? "tv/watch?id="+vid : "movies/watch?id="+vid 
 }
+
+
+export const getStreamingVideoThumbnail = (name) =>
+    API_BASE_URL + ENDPOINT.fetchVideoThumbnail(name);

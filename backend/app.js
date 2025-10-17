@@ -8,6 +8,7 @@ const discoverRouter = require("./Routes/DiscoverRoute");
 const userRouter = require("./Routes/UserRoute");
 const tvRouter = require("./Routes/TvRouter");
 const cookieParser = require('cookie-parser');
+const { videoRouter } = require("./Routes/VideoRoute");
 
 const app = express();
 dotenv.config();
@@ -34,6 +35,7 @@ app.use("/api/user/",userRouter);
 app.use("/api/discover/",discoverRouter);
 app.use("/api/tv/",tvRouter);
 app.use("/api/movies/",movieRouter);
+app.use("/api/premium/",videoRouter);
 
 
 app.listen(SERVER_PORT,function(){

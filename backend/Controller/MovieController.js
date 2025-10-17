@@ -1,5 +1,5 @@
 const { TMDB_ENDPOINT, getMediaList } = require("../Services/tmdb");
-
+const fs = require("fs")
 
 async function getActionMovies(req,res) {
     const response = await getMediaList.get(TMDB_ENDPOINT.fetchActionMovies);
@@ -72,6 +72,9 @@ async function getMovieDetails(req,res) {
 
     
 }
+
+
+
 
 
 module.exports={getActionMovies, getAnimeMovies, getComedyMovies, getHorrorMovies, getRomanceMovies, getMovieDetails}

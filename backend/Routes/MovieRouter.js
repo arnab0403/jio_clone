@@ -1,5 +1,5 @@
 const express = require("express");
-const { getActionMovies, getComedyMovies, getMovieDetails, getAnimeMovies, getHorrorMovies, getRomanceMovies } = require("../Controller/MovieController");
+const { getActionMovies, getComedyMovies, getMovieDetails, getAnimeMovies, getHorrorMovies, getRomanceMovies, getPremiumVideos } = require("../Controller/MovieController");
 const movieRouter = express.Router();
 
 

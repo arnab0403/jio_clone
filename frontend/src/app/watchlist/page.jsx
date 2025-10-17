@@ -41,7 +41,7 @@
 "use client";
 
 import { api, ENDPOINT, getUrlDetails, media } from "@/lib/endpoint";
-import { FolderLockIcon } from "lucide-react";
+import { Film, FolderLockIcon } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -102,9 +102,11 @@ function WatchList() {
 function CategorySectionData({ data }) {
     if (!data || data.length === 0) {
         return (
-            <div className="py-8 px-6 bg-[#0c0a09] text-[white]">
-                <h2 className="text-2xl font-medium mb-6">Watchlist</h2>
-                <div>No items in your watchlist</div>
+            <div className="px-4 py-6 bg-[#0c0a09] text-[white] h-[100vh] -mt-[70px]">
+                <div className="w-full h-full flex justify-center items-center flex-col  text-slate-400">
+                    <Film strokeWidth={1} size={100}/>
+                    <p>No items in your watchlist</p>
+                </div>
             </div>
         );
     }
