@@ -26,7 +26,7 @@ function Headers() {
         <div className='mx-auto px-4 flex items-center text-nowrap'>
             <div className='flex items-center'>
                 <Link href="/">
-                    <Image src="/logo.svg" width={400} height={136} className='' alt='Image'/>
+                    <Image src="/logo.svg" width={400} height={136} className='md:max-w-35 md:max-h-15 max-w-28 max-h-10' alt='Image'/>
                 </Link>
                 {
                 user.user?.isPremium ? 
@@ -35,13 +35,13 @@ function Headers() {
                     <span className='text-[16px]'>Premium</span> 
                 </div>
                 :
-                <Link href="/subscription" className='border text-[#c1a362] font-medium border-[#c1a362] px-6 py-1 flex items-center justify-center gap-2 rounded-[23px] ml-4 mr-4 '>
+                <Link href="/subscription" className='border text-[#c1a362] font-medium border-[#c1a362] md:px-6 py-1 px-4  flex items-center justify-center gap-2 rounded-[23px] md:ml-4 md:mr-4 ml-3 mr-3'>
                     <Image src="/crown.svg"  width={16} height={16} alt='image'/>
-                    <span className='text-[16px]'>Go Premium</span> 
+                    <span className='md:text-[16px] text-[13px]'>Go Premium</span> 
                 </Link>
                 }
             </div>
-            <nav className="flex gap-4">
+            <nav className="lg:flex gap-4 hidden">
                 {navLinks.map(item=>(
                     <Link href={item.href} key={item.key} className={`px-1 py-2 text-[16px] font-medium text-[#b6b8b8] hover:text-white gap ${activeTabKey === item.key
                 ? "border-b-2 border-pink-500 text-white"

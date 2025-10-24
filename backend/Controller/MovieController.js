@@ -1,5 +1,4 @@
 const { TMDB_ENDPOINT, getMediaList } = require("../Services/tmdb");
-const fs = require("fs")
 
 async function getActionMovies(req,res) {
     const response = await getMediaList.get(TMDB_ENDPOINT.fetchActionMovies);

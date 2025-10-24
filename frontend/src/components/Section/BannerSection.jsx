@@ -31,7 +31,7 @@ async function BannerSectionContent({fetcher}) {
                   alt="poster"
                   width={700}
                   height={500}
-                  className="rounded-2xl object-cover w-full h-full bg-slate-600 "
+                  className="rounded-2xl object-cover min-w-full min-h-full bg-slate-600 "
                   quality={30}
                   />
                 <div className="absolute bottom-0 left-0 w-full h-[30%] 
@@ -48,8 +48,8 @@ async function BannerSectionContent({fetcher}) {
         ))}
       </CarouselContent>
       <div className=' absolute bottom-4 right-[12%] hidden md:flex text-white'>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="border-none h-11 w-11"/>
+        <CarouselNext className="border-none h-11 w-11"/>
       </div>
     </Carousel>
   )
@@ -57,10 +57,10 @@ async function BannerSectionContent({fetcher}) {
 
 function BannerSectionFallback() {
   return(
-    <div className='flex justify-center items-center rounded-lg gap-5 bg-black'>
-      <Skeleton className="h-[500px] w-[700px] rounded-lg"/>
-      <Skeleton className="h-[500px] w-[700px] rounded-lg"/>
-      <Skeleton className="h-[500px] w-[700px] rounded-lg"/>
+    <div className='flex justify-center items-center rounded-lg gap-8 bg-black'>
+      <Skeleton className="h-[500px] min-w-[684px] rounded-2xl "/>
+      <Skeleton className="h-[500px] min-w-[684px] rounded-2xl"/>
+      <Skeleton className="h-[500px] min-w-[684px] rounded-2xl"/>
     </div>
   )
 }

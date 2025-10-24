@@ -34,3 +34,54 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+Here's a summary of all the changes made to fix the issues:
+
+## Changes Made
+
+### 1. **Fixed Case Sensitivity Issue**
+**File:** `/Users/jasbir/Downloads/Jio - Clone/frontend/src/components/Section/ProfileSheet.jsx`
+- **Line 13:** Changed import path from `"../section/Headers"` to `"./Headers"`
+- **Issue:** Webpack warnings about modules with different casing
+- **Fix:** Used correct relative path with proper casing
+
+### 2. **Fixed Continuous API Calls in Watchlist**
+**File:** `/Users/jasbir/Downloads/Jio - Clone/frontend/src/app/watchlist/page.jsx`
+- **Complete rewrite:** Replaced Suspense-based implementation with proper React hooks
+- **Changes:**
+  - Removed `CategorySection` component usage
+  - Added proper `useEffect` with `[userData.isLoggedIn]` dependency
+  - Added state management with `useState` for data and loading
+  - Added proper error handling and loading states
+  - Added login status checking with Redux
+- **Issue:** Infinite API calls due to React Suspense re-execution
+- **Fix:** Used proper React patterns with controlled re-rendering
+
+### 3. **Fixed Next.js 15 searchParams Async Issue**
+**File:** `/Users/jasbir/Downloads/Jio - Clone/frontend/src/app/movies/watch/page.jsx`
+- **Line 8-9:** Changed from destructuring in parameters to awaiting searchParams
+- **Before:** `async function page ({ searchParams : {id} })`
+- **After:** `async function page ({ searchParams }) { const { id } = await searchParams; }`
+
+**File:** `/Users/jasbir/Downloads/Jio - Clone/frontend/src/app/tv/watch/page.jsx`
+- **Line 8-9:** Applied same fix as movies watch page
+- **Before:** `async function page ({ searchParams : {id} })`
+- **After:** `async function page ({ searchParams }) { const { id } = await searchParams; }`
+
+## Summary of Issues Fixed
+
+1. ✅ **Webpack Case Sensitivity Warnings** - Fixed import path casing
+2. ✅ **Continuous API Calls** - Replaced problematic Suspense pattern with proper React hooks
+3. ✅ **Next.js 15 Compatibility** - Updated searchParams usage to be async
+
+## Files Modified
+
+1. `frontend/src/components/Section/ProfileSheet.jsx`
+2. `frontend/src/app/watchlist/page.jsx`
+3. `frontend/src/app/movies/watch/page.jsx`
+4. `frontend/src/app/tv/watch/page.jsx`
+
+All changes were minimal and focused on fixing the specific issues without unnecessary formatting changes.

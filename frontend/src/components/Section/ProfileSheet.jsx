@@ -10,7 +10,7 @@ import { ChevronRightIcon, ExternalLinkIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { navLinks } from "../section/Headers";
+import { navLinks } from "./Headers";
 import { useDispatch, useSelector } from "react-redux";
 import { api, ENDPOINT } from "@/lib/endpoint";
 import { userLoggedOutDetails } from "@/redux/userSlice";
@@ -54,7 +54,7 @@ function ProfileSheet() {
           </div>) : (<Image
               src="/profile.avif"
               alt="Profile Icon"
-              className="ml-4 h-10 w-10 rounded-full"
+              className="ml-4 min-h-10 min-w-10 rounded-full"
               width={40}
               height={40}
           />)}

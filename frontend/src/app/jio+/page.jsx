@@ -42,15 +42,15 @@ function WatchList() {
                     <CategorySectionData data={data} />
                 )
             ) : (
-                <div className="flex flex-col items-center justify-center h-[80vh] w-full gap-4">
+                <div className="flex flex-col items-center justify-center h-[100vh] -mt-[75px] w-full gap-4">
                     <FolderLockIcon
                         className="w-32 h-32 text-slate-400"
                         strokeWidth={1.2}
                     />
                     <p className="text-base text-slate-400">
-                        Login to see your watchlist
+                        Login to watch premium contents
                     </p>
-                    <Link href={"/login"} className="rounded-full px-6 mt-4">Login</Link>
+                    <Link href={"/login"} className="rounded-full px-6 py-2 mt-4 bg-pink-600 text-white">Login</Link>
                 </div>
             )}
         </div>

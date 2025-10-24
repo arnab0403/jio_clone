@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React from 'react'
 
 async function page ({ searchParams : {id} }) {
-  
+  console.log(searchParams);
   const details = (await api.get(ENDPOINT.getMovieDetails(id))).data.media.results[0];
 
 
