@@ -1,12 +1,10 @@
 "use client"
 
-import WatchListButton from '@/components/Section/WatchListButton';
 import { Button } from '@/components/ui/button';
-import { api, API_BASE_URL, ENDPOINT } from '@/lib/endpoint'
-import { FilmIcon, FolderLock, Share2 } from 'lucide-react';
+import { API_BASE_URL } from '@/lib/endpoint'
+import { FolderLock, Share2 } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
-import { useRouter } from "next/router";
 import { useSelector } from 'react-redux';
 
 function page ({ searchParams }) {
@@ -28,7 +26,7 @@ function page ({ searchParams }) {
           </div>
           <div className='w-[100%] h-[15%] gap-4 px-4 flex items-center justify-between'>
               {/* <p className='text-white text-2xl'>{details.name}</p> */}
-              <div className='flex justify-center gap-4 items-center'>
+              <div className='flex justify-end gap-4 items-center w-full'>
                 <Button className="bg-[#e11d48] hover:bg-[#cd0b35] cursor-pointer h-10"><Share2/>  Share</Button>
               </div>
           </div>

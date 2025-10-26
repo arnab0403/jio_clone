@@ -6,7 +6,7 @@ const nextConfig = {
         hostname: "image.tmdb.org"
       },
       {
-        hostname:"localhost"
+        hostname:"jio-clone-backend-2.onrender.com"
       }
     ],
   },

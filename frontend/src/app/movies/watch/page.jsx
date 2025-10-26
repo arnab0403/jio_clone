@@ -6,7 +6,6 @@ import Link from 'next/link';
 import React from 'react'
 
 async function page ({ searchParams : {id} }) {
-  console.log(searchParams);
   const details = (await api.get(ENDPOINT.getMovieDetails(id))).data.media.results[0];
 
 
@@ -27,7 +26,9 @@ async function page ({ searchParams : {id} }) {
                 }}/>
               </div>
           </div>
-        </> :  
+        </> 
+        
+        :  
         
         <div className='h-[85%] w-full flex justify-center items-center flex-col text-[#94a3b8]'>
           <FilmIcon size={100}/>

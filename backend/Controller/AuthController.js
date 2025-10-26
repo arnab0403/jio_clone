@@ -103,6 +103,8 @@ const login =async (req,res)=>{
         res.cookie("jwt", token, {
         maxAge: 1000 * 60 * 60 *24,
         httpOnly:true, // it can only be accessed by the server
+        secure: true, // 👈 cookie only sent over HTTPS
+        sameSite: "none" // 👈 required for cross-site cookies
         });
 
         res.status(200).json({
@@ -110,7 +112,6 @@ const login =async (req,res)=>{
             status:"success",
             user:userRes
         });
-
     } catch (error) {
         console.log(error);
         res.status(500).json({

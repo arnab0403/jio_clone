@@ -30,7 +30,7 @@ function Headers() {
                 </Link>
                 {
                 user.user?.isPremium ? 
-                <div className='border text-[#c1a362] font-medium border-[#c1a362] px-6 py-1 flex items-center justify-center gap-2 rounded-[23px] ml-4 mr-4 '>
+                <div className='border text-[#c1a362] font-medium border-[#c1a362] px-6 py-1 flex items-center justify-center gap-2 rounded-[23px] ml-4 mr-4'>
                     <Image src="/crown.svg"  width={16} height={16} alt='image'/>
                     <span className='text-[16px]'>Premium</span> 
                 </div>
