@@ -3,6 +3,7 @@ import Skeleton from '../../../atom/Skeleton'
 import { getUrlDetails, media } from '@/lib/endpoint'
 import Image from 'next/image';
 import Link from 'next/link';
+import { InboxIcon } from 'lucide-react';
 
 function CategorySection({title,id,fetcher}) {
   console.log(fetcher)
@@ -23,7 +24,18 @@ function CategorySection({title,id,fetcher}) {
 
 async function CategorySectionData({fetcher}) {
   const data = await fetcher();
-  console.log(data)
+
+  if (!data || data.length === 0) {
+    return (
+        <div className="flex flex-col items-center justify-center w-full h-[300px] py-12">
+            <InboxIcon
+                className="w-32 h-32 text-slate-400 mb-10"
+                strokeWidth={1.2}
+            />
+            <p className="text-lg text-gray-500">No items found.</p>
+        </div>
+    );
+    }
   return (
     <div className='flex gap-4 w-full overflow-scroll scrollbar-hide'>
             {data.map((vid)=>(

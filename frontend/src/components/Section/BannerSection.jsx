@@ -5,6 +5,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import Image from 'next/image';
 import Link from 'next/link';
 
+
 async function BannerSection({fetcher}) {
   return(
     <Suspense fallback={<BannerSectionFallback/>}>
@@ -57,7 +58,7 @@ async function BannerSectionContent({fetcher}) {
 
 function BannerSectionFallback() {
   return(
-    <div className='flex justify-center items-center rounded-lg gap-8 bg-black'>
+    <div className='flex justify-center items-center rounded-lg gap-8 bg-black overflow-hidden'>
       <Skeleton className="h-[500px] min-w-[684px] rounded-2xl "/>
       <Skeleton className="h-[500px] min-w-[684px] rounded-2xl"/>
       <Skeleton className="h-[500px] min-w-[684px] rounded-2xl"/>

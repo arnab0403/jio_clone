@@ -1,7 +1,7 @@
+import ShareButton from '@/components/Section/ShareButton';
 import WatchListButton from '@/components/Section/WatchListButton';
-import { Button } from '@/components/ui/button';
 import { api, ENDPOINT } from '@/lib/endpoint'
-import { FilmIcon, Share2 } from 'lucide-react';
+import { FilmIcon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
 
@@ -19,7 +19,7 @@ async function page ({ searchParams : {id} }) {
           <div className='w-[100%] h-[15%] gap-4 px-4 flex items-center justify-between'>
               <p className='text-white text-2xl'>{details.name}</p>
               <div className='flex justify-center gap-4 items-center'>
-                <Button className="bg-[#e11d48] hover:bg-[#cd0b35] cursor-pointer h-10"><Share2/>  Share</Button>
+                <ShareButton/>
                 <WatchListButton watchList={{
                   id:id,
                   media_type:details.media_type || "movie"

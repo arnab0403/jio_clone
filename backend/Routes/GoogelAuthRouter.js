@@ -15,6 +15,11 @@ googleRouter.get( '/callback',passport.authenticate( 'google',{session:false}),
             // user is attached to req.user by passport verify callback
             const user = req.user;
             
+            const FRONT_END_URL=process.env.FRONT_END_URL;
+            if(user.provider==="jio"){
+                return res.redirect(`${FRONT_END_URL}/login?error=manual_account`)
+            }
+            
             // Create JWT access token
             const jwtToken = jwt.sign({id:user._id},process.env.SECRECT_KEY,{expiresIn:"7d"});
 
@@ -28,8 +33,7 @@ googleRouter.get( '/callback',passport.authenticate( 'google',{session:false}),
 
             // redirecting to desiganted page
             console.log("Cookie Updated");
-            const FRONT_END_URL=process.env.FRONT_END_URL;
-            res.redirect(`${FRONT_END_URL}/user`);
+            res.redirect(`${FRONT_END_URL}/`);
 
         } catch (error) {
             console.log(error);

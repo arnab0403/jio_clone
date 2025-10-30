@@ -1,10 +1,9 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -14,49 +13,72 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from 'next/link'
-import { api, ENDPOINT } from '@/lib/endpoint'
+import { api, API_BASE_URL, ENDPOINT } from '@/lib/endpoint'
 import { toast } from 'sonner'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { userLoggedInDetails } from '@/redux/userSlice'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter, useSearchParams } from 'next/navigation'
+import Image from 'next/image'
+import { LoaderCircle } from 'lucide-react'
+
 
 function Login() {
+    const searchParams = useSearchParams();
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
-    
+    const [loading,setLoading]=useState(false);
+    const user = useSelector((state) => state.user);
     const dispatch=useDispatch();
     const router=useRouter();
-
-    const handleSubmit=async()=>{
-        if (!email || !password) {
-            return toast.warning("All fileds are required");
+    
+    // checking if any errors are there 
+    useEffect(()=>{  
+        const error = searchParams.get("error") || "";
+        if (error==="manual_account") {
+            toast("Please login with email ID & Password");
         }
 
+        if (user.isLoggedIn) {
+            router.push("/");
+        }
+    },[])
+    
+
+    
+    // custom login handler
+    const handleSubmit=async()=>{
+        setLoading(true);
+        if (!email || !password) {
+            setLoading(false);
+            return toast.warning("All fileds are required");
+        }
+        
         try {
             const response = await api.post(ENDPOINT.login,{email,password});
             if (response.data.status === "success") {
                 dispatch(userLoggedInDetails(response.data.user));
-                router.push("/");
-                return toast.success("Sign in Successfully..");   
+                router.push("/"); 
             }
+            setLoading(false);
         } catch (error) {
             // Axios throws here if status != 200
             if (error.response) {
-            return toast.warning(error.response.data.message || "Email Not Found..!");
+                toast.warning(error.response.data.message || "Email Not Found..!");
             } else {
-            return toast.error("Something went wrong. Please try again later.");
+                toast.error("Something went wrong. Please try again later.");
             }
+            setLoading(false);
         }
     }
   return (
     <div className='h-[100vh] flex justify-center items-center'>
             <Card className="w-full max-w-sm bg-[#1c1917]  border border-[#313131] text-white rounded-sm">
-            <CardHeader>
-                <CardTitle className="text-2xl">Login </CardTitle>
-                <CardDescription className="text-[#999999]">
-                Enter your email below to login to your account
-                </CardDescription>
-            </CardHeader>
+                <CardHeader>
+                    <CardTitle className="text-2xl">Login </CardTitle>
+                    <CardDescription className="text-[#999999]">
+                    Enter your email below to login to your account
+                    </CardDescription>
+                </CardHeader>
             <CardContent>
                 <div>
                     <div className="flex flex-col gap-4">
@@ -80,7 +102,11 @@ function Login() {
             </CardContent>
             <CardFooter className="flex-col gap-2">
                 <Button type="submit" className="w-full bg-[#e11d48] hover:bg-[#cb143c] cursor-pointer" onClick={handleSubmit}>
-                    Sign In
+                    {loading ?<LoaderCircle className='animate-spin'/> :"Sign In"}
+                </Button>
+
+                <Button className="w-full bg-[white] hover:bg-[#cfcfcf] cursor-pointer" onClick={()=>{window.open(`${API_BASE_URL}/auth/google`,"_self")}}>
+                    <Image src="/google.png" height={20} width={20} alt='google'/>
                 </Button>
             <div className='w-full flex flex-row justify-between text-sm pt-6'>
                 <div>

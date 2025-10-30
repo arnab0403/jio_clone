@@ -49,9 +49,12 @@ export const ENDPOINT = {
     fetchAllStreamingVideos: `/premium/video`,
     fetchStreamingVideo: (name) => `/premium/video/steam?name=${name}`,
     fetchVideoThumbnail: (name) => `/premium/video/thumbnail?name=${name}`,
+
+    //search movies
+    searchAllMovies:(name)=>`/movies/search/?movieName=${name}`
 }
 
-export const media = (path) => `https://image.tmdb.org/t/p/original` + path;
+export const media = (path,exception) => `https://image.tmdb.org/t/p/original` + (path || exception);
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -63,7 +66,7 @@ export const api = axios.create({
 
 
 export const getUrlDetails=(vid,mediaType)=>{
-    return mediaType==="tv" ? "tv/watch?id="+vid : "movies/watch?id="+vid 
+    return mediaType==="tv" ? "/tv/watch?id="+vid : "/movies/watch?id="+vid 
 }
 
 

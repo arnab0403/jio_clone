@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -16,6 +15,8 @@ import { Label } from "@/components/ui/label"
 import { toast } from "sonner"
 import Link from 'next/link'
 import { api, ENDPOINT } from '@/lib/endpoint'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/navigation'
 function Signup() {
     const [userObject,setUserObject]=useState({
         name:"",
@@ -23,11 +24,14 @@ function Signup() {
         password:"",
         confirmPassword:""
     });
+    const router=useRouter();
+
+    const  user = useSelector((state)=>state.user);
 
     const handleSubmit=async()=>{
         console.log(userObject)
         if (!userObject.name || !userObject.confirmPassword || !userObject.password || !userObject.email) {
-           return toast("All the fields are required..!");
+           return toast("Please fill all the fileds before Sign Up..!");
         }
         if (userObject.confirmPassword!==userObject.password) {
             return toast.warning("Password and Confirm Password should be same")
@@ -55,11 +59,14 @@ function Signup() {
             toast.error("Something went wrong. Please try again later.");
             }
         }
-
-
-
+   
     }
-
+    
+    if (!user.isLoggedIn) {
+        router.push("/");
+        return null;
+    }
+    
     const handleInput=(e)=>{
         setUserObject(userObject => ({
         ...userObject,

@@ -7,6 +7,12 @@ const nextConfig = {
       },
       {
         hostname:"jio-clone-backend-2.onrender.com"
+      },
+      {
+        hostname:"lh3.googleusercontent.com"
+      },
+      {
+        hostname:"localhost"
       }
     ],
   },

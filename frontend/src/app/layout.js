@@ -6,7 +6,8 @@ import Footer from "@/components/Section/Footer";
 import { Toaster } from "@/components/ui/sonner"
 import StoreProvider from "@/redux/StoreProvider";
 import InitalLoad from "@/components/Section/InitalLoad";
-
+import NextProgress from "next-progress";
+import NextTopLoader from "nextjs-toploader";
 
 const inter=Inter({subsets:["latin"]});
 
@@ -24,6 +25,15 @@ export default function RootLayout({ children }) {
       <body
         className={`${inter.className} antialiased`}
       >
+        <NextTopLoader 
+          color="#e11d48"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          showSpinner={false}
+          zIndex={1600}
+          showAtBottom={false}
+        />
         <StoreProvider>
           <InitalLoad>
             <Headers/>
