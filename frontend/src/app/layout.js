@@ -1,4 +1,3 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Headers from "@/components/Section/Headers";
 import { Inter } from "next/font/google";
@@ -6,7 +5,6 @@ import Footer from "@/components/Section/Footer";
 import { Toaster } from "@/components/ui/sonner"
 import StoreProvider from "@/redux/StoreProvider";
 import InitalLoad from "@/components/Section/InitalLoad";
-import NextProgress from "next-progress";
 import NextTopLoader from "nextjs-toploader";
 
 const inter=Inter({subsets:["latin"]});

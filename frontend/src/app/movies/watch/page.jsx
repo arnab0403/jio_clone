@@ -5,7 +5,8 @@ import { FilmIcon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
 
-async function page ({ searchParams : {id} }) {
+async function page ({ searchParams}) {
+  const {id} = await searchParams;
   const details = (await api.get(ENDPOINT.getMovieDetails(id))).data.media.results[0];
 
 

@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { InboxIcon } from 'lucide-react';
 
 function CategorySection({title,id,fetcher}) {
-  console.log(fetcher)
   return (
     <div className='py-8 px-6 bg-[#0c0a09] text-[white]'>
         <h2 id={id} className='text-2xl font-medium mb-6 scroll-m-[100px]'>

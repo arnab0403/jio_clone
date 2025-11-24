@@ -28,6 +28,13 @@ function Signup() {
 
     const  user = useSelector((state)=>state.user);
 
+    useState(()=>{
+        if (user.isLoggedIn) {
+            router.push("/");
+            return null;
+        }
+    },[])
+
     const handleSubmit=async()=>{
         console.log(userObject)
         if (!userObject.name || !userObject.confirmPassword || !userObject.password || !userObject.email) {
@@ -62,11 +69,7 @@ function Signup() {
    
     }
     
-    if (!user.isLoggedIn) {
-        router.push("/");
-        return null;
-    }
-    
+
     const handleInput=(e)=>{
         setUserObject(userObject => ({
         ...userObject,
